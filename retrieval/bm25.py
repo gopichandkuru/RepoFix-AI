@@ -146,6 +146,10 @@ class BM25RepoIndex:
                 score += idf * ((f * (self.k1 + 1.0)) / (f + denom_norm))
 
             meta = self.doc_meta[idx]
+            fp_str = str(meta["file_path"])
+            is_test = Path(fp_str).name.startswith("test_") or "/tests/" in f"/{fp_str}"
+            if not is_test and score > 0:
+                score += 0.5
             sym_name = meta["symbol_name"]
             exact_hit = False
             if isinstance(sym_name, str) and sym_name.lower() in q_lower_set:
