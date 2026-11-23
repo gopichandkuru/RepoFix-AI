@@ -1,11 +1,16 @@
+import importlib.util
 from pathlib import Path
+import sys
 
-from datasets.prepare_data import (
-    compute_repo_disjoint_split,
-    normalize_fixture_tasks,
-    normalize_swe_bench_rows,
-    save_normalized_jsonl,
-)
+_spec = importlib.util.spec_from_file_location("local_prepare_data", "datasets/prepare_data.py")
+_prep = importlib.util.module_from_spec(_spec)
+sys.modules["local_prepare_data"] = _prep
+_spec.loader.exec_module(_prep)
+
+compute_repo_disjoint_split = _prep.compute_repo_disjoint_split
+normalize_fixture_tasks = _prep.normalize_fixture_tasks
+normalize_swe_bench_rows = _prep.normalize_swe_bench_rows
+save_normalized_jsonl = _prep.save_normalized_jsonl
 
 
 def test_normalize_fixtures_and_save_jsonl(tmp_path: Path):
