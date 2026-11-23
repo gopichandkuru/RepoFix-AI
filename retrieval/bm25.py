@@ -39,7 +39,7 @@ class RetrievalCandidate:
 class BM25RepoIndex:
     """Lexical BM25 index over repository files and extracted symbols."""
 
-    def __init__(self, k1: float = 1.5, b: float = 0.75):
+    def __init__(self, k1: float = 1.5, b: float = 0.2):
         self.k1 = k1
         self.b = b
         self.doc_ids: List[str] = []
@@ -149,7 +149,7 @@ class BM25RepoIndex:
             fp_str = str(meta["file_path"])
             is_test = Path(fp_str).name.startswith("test_") or "/tests/" in f"/{fp_str}"
             if not is_test and score > 0:
-                score += 0.5
+                score += 1.5
             sym_name = meta["symbol_name"]
             exact_hit = False
             if isinstance(sym_name, str) and sym_name.lower() in q_lower_set:
