@@ -1,4 +1,5 @@
 from pathlib import Path
+import difflib
 import re
 from typing import Optional
 
@@ -72,3 +73,16 @@ def generate_with_qlora_adapter(
     generated_tokens = outputs[0][inputs["input_ids"].shape[1]:]
     raw = tokenizer.decode(generated_tokens, skip_special_tokens=True).strip()
     return extract_clean_diff(raw)
+
+
+def build_unified_diff_from_content(rel_path: str, original_text: str, updated_text: str) -> str:
+    """Generate a valid unified diff with exact line numbers from original and updated text."""
+    clean_rel = rel_path.lstrip("./")
+    return "".join(
+        difflib.unified_diff(
+            original_text.splitlines(keepends=True),
+            updated_text.splitlines(keepends=True),
+            fromfile=f"a/{clean_rel}",
+            tofile=f"b/{clean_rel}",
+        )
+    )
