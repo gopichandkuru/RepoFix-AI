@@ -1,0 +1,7 @@
+{
+  "fixture_id": "fix_02_pagination",
+  "issue": "paginate([1..10], page=2, page_size=3) returns [4] instead of [4, 5, 6].",
+  "expected_file": "api/pager.py",
+  "expected_symbol": "paginate",
+  "test_file": "test_pager.py"
+}

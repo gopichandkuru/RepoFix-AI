@@ -1,0 +1,7 @@
+{
+  "fixture_id": "fix_01_discount",
+  "issue": "apply_discount(200.0, 20.0) returns 180.0 instead of 160.0; 20% off 200 should subtract 40.",
+  "expected_file": "shop/pricing.py",
+  "expected_symbol": "apply_discount",
+  "test_file": "test_pricing.py"
+}

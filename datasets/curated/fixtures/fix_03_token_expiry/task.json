@@ -1,0 +1,7 @@
+{
+  "fixture_id": "fix_03_token_expiry",
+  "issue": "is_token_expired returns True at now=1030 when issued_at=1000 and ttl_seconds=60.",
+  "expected_file": "auth/session.py",
+  "expected_symbol": "is_token_expired",
+  "test_file": "test_session.py"
+}
