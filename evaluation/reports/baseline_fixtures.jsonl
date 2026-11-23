@@ -1,0 +1,3 @@
+{"fixture_id": "fix_01_discount", "expected_file": "shop/pricing.py", "expected_symbol": "apply_discount", "ingested_file_count": 2, "expected_file_ingested": true, "baseline_tests_passed": false, "baseline_return_code": 1, "elapsed_ms": 398.42}
+{"fixture_id": "fix_02_pagination", "expected_file": "api/pager.py", "expected_symbol": "paginate", "ingested_file_count": 2, "expected_file_ingested": true, "baseline_tests_passed": false, "baseline_return_code": 1, "elapsed_ms": 349.08}
+{"fixture_id": "fix_03_token_expiry", "expected_file": "auth/session.py", "expected_symbol": "is_token_expired", "ingested_file_count": 2, "expected_file_ingested": true, "baseline_tests_passed": false, "baseline_return_code": 1, "elapsed_ms": 348.95}
