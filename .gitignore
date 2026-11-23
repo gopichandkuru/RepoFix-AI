@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+datasets/raw/
+datasets/processed/
+model/adapters/
+*.safetensors
+*.bin
+*.gguf
+.env
