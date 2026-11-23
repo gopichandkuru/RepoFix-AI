@@ -19,7 +19,6 @@ def tokenize_code(text: str) -> List[str]:
         tokens.append(lower)
         if "_" in lower:
             tokens.extend(part for part in lower.split("_") if part)
-        # Split camelCase boundaries on original token
         camel_parts = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", raw).lower().split()
         if len(camel_parts) > 1:
             tokens.extend(camel_parts)
@@ -69,7 +68,6 @@ class BM25RepoIndex:
             except OSError:
                 continue
 
-            # Index file-level document
             file_doc_text = f"{item.rel_path}\n{content}"
             self._add_document(
                 doc_id=f"file:{item.rel_path}",
@@ -83,7 +81,6 @@ class BM25RepoIndex:
                 },
             )
 
-            # Index Python symbols for finer localization
             if item.language == "python":
                 parsed = parse_python_file(full_path, rel_path=item.rel_path)
                 lines = content.splitlines()
@@ -124,7 +121,8 @@ class BM25RepoIndex:
         df_t = self.df.get(term, 0)
         if n_docs == 0 or df_t == 0:
             return 0.0
-        return math.log(1.0 + (n_docs - df_t + 0.5) / (df_t + 0.5))
+        # Ensure positive weight even when a term appears in all docs of a tiny corpus
+        return max(0.1, math.log(1.0 + (n_docs - df_t + 0.5) / (df_t + 0.5)))
 
     def search(self, query: str, top_k: int = 5, exact_symbol_boost: float = 2.5) -> List[RetrievalCandidate]:
         q_tokens = tokenize_code(query)
@@ -166,18 +164,17 @@ class BM25RepoIndex:
                 )
             )
 
-        scored.sort(key=lambda c: c.score, reverse=True)
+        scored.sort(key=lambda c: (c.score, 1 if c.exact_symbol_hit else 0), reverse=True)
         return scored[:top_k]
 
     def top_files(self, query: str, top_k: int = 5) -> List[str]:
-        candidates = self.search(query, top_k=max(top_k * 3, 10))
-        seen: List[str] = []
+        candidates = self.search(query, top_k=len(self.doc_ids))
+        best_by_file: Dict[str, float] = {}
         for c in candidates:
-            if c.file_path not in seen:
-                seen.append(c.file_path)
-            if len(seen) >= top_k:
-                break
-        return seen
+            if c.file_path not in best_by_file or c.score > best_by_file[c.file_path]:
+                best_by_file[c.file_path] = c.score
+        ranked = sorted(best_by_file.items(), key=lambda item: item[1], reverse=True)
+        return [fp for fp, _ in ranked[:top_k]]
 
 
 def recall_at_k(ranked_files: Sequence[str], expected_file: str, k: int) -> float:
