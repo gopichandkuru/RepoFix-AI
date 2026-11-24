@@ -1,0 +1,11 @@
+{
+  "model_id": "repofix-qwen25-coder-1.5b-nf4",
+  "base_model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter_dir": "model/adapters/repofix-qwen25-coder-1.5b-qlora-v0",
+  "quant_method": "4-bit NF4 (BitsAndBytesConfig)",
+  "double_quant": true,
+  "compute_dtype": "float16",
+  "cuda_available": true,
+  "status": "verified_4bit_nf4_inference",
+  "sample_output": "```diff\n--- shop/pricing.py\n+++ shop/pricing.py\n@@ -34,7 +34,7 @@\n     def apply_discount(price, discount):\n         \"\"\"Apply a discount to the given price.\"\"\"\n         if not isinstance(price, (int, float)):\n-            raise ValueError(\"Price must be an integer or float\")\n+            raise ValueError(\"Price must be an integer or float.\")\n         if not isinstance(discount, (int, float)):\n             raise ValueError(\"Discount must be an integer or float.\")\n         if discount > 100:\n```"
+}
