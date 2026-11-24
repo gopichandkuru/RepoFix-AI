@@ -1,0 +1,108 @@
+{
+  "bm25_only": {
+    "mode": "bm25_only",
+    "total_tasks": 3,
+    "recall_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "patch_apply_rate": 0.0,
+    "test_pass_rate": 0.0,
+    "rows": [
+      {
+        "fixture_id": "fix_01_discount",
+        "expected_file": "shop/pricing.py",
+        "top_files": [
+          "shop/pricing.py",
+          "test_pricing.py"
+        ],
+        "recall@1": 1.0,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "confidence": 0.64,
+        "patch_applied": null,
+        "tests_passed": null
+      },
+      {
+        "fixture_id": "fix_02_pagination",
+        "expected_file": "api/pager.py",
+        "top_files": [
+          "api/pager.py",
+          "test_pager.py"
+        ],
+        "recall@1": 1.0,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "confidence": 0.66,
+        "patch_applied": null,
+        "tests_passed": null
+      },
+      {
+        "fixture_id": "fix_03_token_expiry",
+        "expected_file": "auth/session.py",
+        "top_files": [
+          "auth/session.py",
+          "test_session.py"
+        ],
+        "recall@1": 1.0,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "confidence": 0.61,
+        "patch_applied": null,
+        "tests_passed": null
+      }
+    ]
+  },
+  "bm25_plus_graph": {
+    "mode": "bm25+graph",
+    "total_tasks": 3,
+    "recall_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "patch_apply_rate": 0.0,
+    "test_pass_rate": 0.0,
+    "rows": [
+      {
+        "fixture_id": "fix_01_discount",
+        "expected_file": "shop/pricing.py",
+        "top_files": [
+          "shop/pricing.py",
+          "test_pricing.py"
+        ],
+        "recall@1": 1.0,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "confidence": 0.64,
+        "patch_applied": null,
+        "tests_passed": null
+      },
+      {
+        "fixture_id": "fix_02_pagination",
+        "expected_file": "api/pager.py",
+        "top_files": [
+          "api/pager.py",
+          "test_pager.py"
+        ],
+        "recall@1": 1.0,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "confidence": 0.66,
+        "patch_applied": null,
+        "tests_passed": null
+      },
+      {
+        "fixture_id": "fix_03_token_expiry",
+        "expected_file": "auth/session.py",
+        "top_files": [
+          "auth/session.py",
+          "test_session.py"
+        ],
+        "recall@1": 1.0,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "confidence": 0.61,
+        "patch_applied": null,
+        "tests_passed": null
+      }
+    ]
+  }
+}
