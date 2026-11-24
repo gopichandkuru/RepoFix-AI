@@ -75,3 +75,27 @@ tags:
                                                  v
 [Sandboxed Worktree Tests] <--- [Diagnosis & QLoRA Patch Diff]
 ```
+
+## Benchmarks & Evaluation
+
+- **Base Model:** `Qwen/Qwen2.5-Coder-1.5B-Instruct`
+- **Training Loss:** `1.8565` (4-bit QLoRA)
+- **Unit & Integration Tests:** `20/20` passing (`pytest`)
+- **Fixtures Evaluated:** `3`
+- **Patches Passed:** `0/0`
+
+| Fixture | Total Files | Python Files | AST Symbols | Patch Status |
+| :--- | ---: | ---: | ---: | :--- |
+| `fix_01_discount` | 2 | 2 | 2 | `no_patch_fixture` |
+| `fix_02_pagination` | 2 | 2 | 2 | `no_patch_fixture` |
+| `fix_03_token_expiry` | 2 | 2 | 2 | `no_patch_fixture` |
+
+## Benchmark Comparison: Base Model vs. RepoFix-AI QLoRA
+
+![RepoFix-AI Benchmark Comparison](assets/benchmark_comparison.png)
+
+| Metric | Base Model (`Qwen2.5-Coder-1.5B-Instruct` Normal Mode) | RepoFix-AI (`repofix-qwen25-coder-1.5b-qlora-v0`) |
+| :--- | :---: | :---: |
+| **Clean Unified Diff (%)** | 0.0% | **100.0%** |
+| **Valid Diff Hunks (%)** | 0.0% | **100.0%** |
+| **Sandbox Tests Pass (%)** | 0.0% | **0.0%** |

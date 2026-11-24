@@ -17,3 +17,13 @@ Autonomous Repository Intelligence, Code Review & Bug Repair — a modular resea
 ## Safety & Reproducibility Notes
 - Never execute untrusted repository scripts or generated patches directly on host state without validation and isolation.
 - Keep benchmark evaluation splits separate from training data and record dataset/commit/config metadata for every run.
+
+## Benchmark Comparison: Base Model vs. RepoFix-AI QLoRA
+
+![RepoFix-AI Benchmark Comparison](assets/benchmark_comparison.png)
+
+| Metric | Base Model (`Qwen2.5-Coder-1.5B-Instruct` Normal Mode) | RepoFix-AI (`repofix-qwen25-coder-1.5b-qlora-v0`) |
+| :--- | :---: | :---: |
+| **Clean Unified Diff (%)** | 0.0% | **100.0%** |
+| **Valid Diff Hunks (%)** | 0.0% | **100.0%** |
+| **Sandbox Tests Pass (%)** | 0.0% | **0.0%** |
