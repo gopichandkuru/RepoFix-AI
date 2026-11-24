@@ -27,3 +27,21 @@ Autonomous Repository Intelligence, Code Review & Bug Repair — a modular resea
 | **Accuracy** | 100.0% | **100.0%** |
 | **Speed (Token Generation Rate)** | 1.62 tok/s (21025.9 ms avg) | **3.07 tok/s** (22178.3 ms avg) |
 | **Token Generation (Total Output)** | 34 tokens | **68 tokens** |
+
+## Training Configuration
+
+- **Base Model:** `Qwen/Qwen2.5-Coder-1.5B-Instruct` (1.54B total parameters)
+- **Fine-Tuning Method:** 4-bit NF4 QLoRA
+- **Hardware:** NVIDIA RTX 3050 (4GB VRAM)
+- **LoRA Settings:** `r = 16`, `lora_alpha = 32`, `learning_rate = 2e-4`, `seed = 42`
+- **Training Loss:** `1.8565`
+
+### Benchmarks: Base Normal Mode vs. RepoFix-AI Model
+
+![Benchmark Comparison — Accuracy, Speed & Token Generation](assets/benchmark_comparison.png)
+
+| Metric | Base Model (Normal Mode) | RepoFix-AI Model (Fine-Tuned & Quantized) |
+| :--- | :---: | :---: |
+| **Accuracy** | 100.0% | **100.0%** |
+| **Speed** | 1.62 tok/s (21025.9 ms) | **3.07 tok/s** (22178.3 ms) |
+| **Token Generation** | 34 tokens | **68 tokens** |
