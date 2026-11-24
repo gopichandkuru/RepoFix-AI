@@ -1,0 +1,15 @@
+{
+  "base_model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "finetuned_adapter": "gopichand55k/repofix-qwen25-coder-1.5b-qlora-v0",
+  "fixtures_count": 1,
+  "base_normal_mode": {
+    "Clean Unified Diff (%)": 0.0,
+    "Valid Diff Hunks (%)": 0.0,
+    "Sandbox Tests Pass (%)": 0.0
+  },
+  "repofix_qlora_mode": {
+    "Clean Unified Diff (%)": 100.0,
+    "Valid Diff Hunks (%)": 100.0,
+    "Sandbox Tests Pass (%)": 0.0
+  }
+}
