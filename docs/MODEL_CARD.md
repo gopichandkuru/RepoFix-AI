@@ -1,17 +1,12 @@
 ---
 language:
-- en
-- python
-license: apache-2.0
+  - en
+library_name: peft
 base_model: Qwen/Qwen2.5-Coder-1.5B-Instruct
 tags:
-- code
-- bug-repair
-- qlora
-- peft
-- swe-bench
-datasets:
-- SWE-bench/SWE-bench_Lite
+  - qlora
+  - code-repair
+  - repofix-ai
 ---
 
 # RepoFix AI — QLoRA Adapter (`repofix-qwen25-coder-1.5b-qlora-v0`)
@@ -32,3 +27,51 @@ datasets:
 
 ## Safety & Usage Limitations
 - Generated patches must always be validated (`agent/patch_validator.py`) and executed inside an isolated worktree or sandbox (`sandbox/docker_runner.py`) before applying to any working repository.
+
+## How RepoFix-AI Works
+
+### System Architecture
+
+```text
++-------------------------------------------------------------------+
+|                        Streamlit UI (app/)                        |
+| Home | Bug Detective | PR Reviewer | Patch Lab | Repo Explorer |  |
+| Bench Lab | Model Lab      (Emerald-Dark Theme + Live Charts)     |
++---------------------------------+---------------------------------+
+                                  |
+        +-------------------------+-------------------------+
+        |                                                   |
+        v                                                   v
++-----------------------------+             +-----------------------------+
+|  Ingestion & AST Parser     |             |      Retrieval Engine       |
+| (repo_engine/ingest.py &    | ----------> | (BM25 Ranking + Graph-RAG   |
+|  repo_engine/parser.py)     |             |  Symbol/Import Expansion)   |
++--------------+--------------+             +--------------+--------------+
+               |                                           |
+               +---------------------+---------------------+
+                                     |
+                                     v
++-------------------------------------------------------------------+
+|               Diagnosis, PR Review & QLoRA Model                  |
+| agent/ (Diagnosis, Diff Review, Patch Validation)                 |
+| model/ (Qwen2.5-Coder-1.5B-Instruct 4-bit QLoRA Adapter)          |
++---------------------------------+---------------------------------+
+                                  |
+                                  v
++-------------------------------------------------------------------+
+|             Isolated Git Worktree Sandbox (sandbox/)              |
+|    Apply Unified Diff  --->  Syntax Check  --->  Run pytest       |
++-------------------------------------------------------------------+
+```
+
+### Execution Flow
+
+```text
+[ZIP / Repo / Bug Input]
+         |
+         v
+[Safe Ingestion & AST Symbols] ---> [BM25 + Graph-RAG Context]
+                                                 |
+                                                 v
+[Sandboxed Worktree Tests] <--- [Diagnosis & QLoRA Patch Diff]
+```
