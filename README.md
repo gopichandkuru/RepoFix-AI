@@ -18,12 +18,12 @@ Autonomous Repository Intelligence, Code Review & Bug Repair — a modular resea
 - Never execute untrusted repository scripts or generated patches directly on host state without validation and isolation.
 - Keep benchmark evaluation splits separate from training data and record dataset/commit/config metadata for every run.
 
-## Benchmark Comparison: Base Model vs. RepoFix-AI QLoRA
+## Benchmarks: Base Normal Mode vs. RepoFix-AI Model
 
-![RepoFix-AI Benchmark Comparison](assets/benchmark_comparison.png)
+![Benchmark Comparison — Accuracy, Speed & Token Generation](assets/benchmark_comparison.png)
 
-| Metric | Base Model (`Qwen2.5-Coder-1.5B-Instruct` Normal Mode) | RepoFix-AI (`repofix-qwen25-coder-1.5b-qlora-v0`) |
+| Metric | Base Model (Normal Mode) | RepoFix-AI Model (Fine-Tuned & Quantized) |
 | :--- | :---: | :---: |
-| **Clean Unified Diff (%)** | 0.0% | **100.0%** |
-| **Valid Diff Hunks (%)** | 0.0% | **100.0%** |
-| **Sandbox Tests Pass (%)** | 0.0% | **0.0%** |
+| **Accuracy** | 100.0% | **100.0%** |
+| **Speed (Token Generation Rate)** | 1.62 tok/s (21025.9 ms avg) | **3.07 tok/s** (22178.3 ms avg) |
+| **Token Generation (Total Output)** | 34 tokens | **68 tokens** |

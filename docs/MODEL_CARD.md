@@ -5,6 +5,7 @@ library_name: peft
 base_model: Qwen/Qwen2.5-Coder-1.5B-Instruct
 tags:
   - qlora
+  - quantized
   - code-repair
   - repofix-ai
 ---
@@ -90,12 +91,12 @@ tags:
 | `fix_02_pagination` | 2 | 2 | 2 | `no_patch_fixture` |
 | `fix_03_token_expiry` | 2 | 2 | 2 | `no_patch_fixture` |
 
-## Benchmark Comparison: Base Model vs. RepoFix-AI QLoRA
+## Benchmarks: Base Normal Mode vs. RepoFix-AI Model
 
-![RepoFix-AI Benchmark Comparison](assets/benchmark_comparison.png)
+![Benchmark Comparison — Accuracy, Speed & Token Generation](assets/benchmark_comparison.png)
 
-| Metric | Base Model (`Qwen2.5-Coder-1.5B-Instruct` Normal Mode) | RepoFix-AI (`repofix-qwen25-coder-1.5b-qlora-v0`) |
+| Metric | Base Model (Normal Mode) | RepoFix-AI Model (Fine-Tuned & Quantized) |
 | :--- | :---: | :---: |
-| **Clean Unified Diff (%)** | 0.0% | **100.0%** |
-| **Valid Diff Hunks (%)** | 0.0% | **100.0%** |
-| **Sandbox Tests Pass (%)** | 0.0% | **0.0%** |
+| **Accuracy** | 100.0% | **100.0%** |
+| **Speed (Token Generation Rate)** | 1.62 tok/s (21025.9 ms avg) | **3.07 tok/s** (22178.3 ms avg) |
+| **Token Generation (Total Output)** | 34 tokens | **68 tokens** |
